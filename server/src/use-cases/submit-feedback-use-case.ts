@@ -16,11 +16,11 @@ export class SubmitFeedbackUseCase {
   async execute(request: SubmitFeedbackUseCaseRequest) {
     const { type, comment, screenshot } = request;
 
-    if(!type ){
-      throw new Error("type is required")
+    if (!type) {
+      throw new Error("type is required");
     }
-    if(!comment){
-      throw new Error("comment is required")
+    if (!comment) {
+      throw new Error("comment is required");
     }
 
     if (screenshot && !screenshot.startsWith("data:image/png;base64")) {
@@ -39,6 +39,7 @@ export class SubmitFeedbackUseCase {
         `<div style="font-family:sans-serif; font-size:16px; color:#111;">`,
         `<p>Tipo do Feedback: ${type}</p>`,
         `<p>Comentario do Feedback: ${comment}</p>`,
+        screenshot ? `<img src="${screenshot}" />` : ``,
         `</div>`,
       ].join("\n"),
     });
